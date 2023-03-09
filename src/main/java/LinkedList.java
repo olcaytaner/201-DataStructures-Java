@@ -66,4 +66,13 @@ public class LinkedList {
         return count;
     }
 
+    public String toString(){
+        StringBuilder result = new StringBuilder();
+        Node tmp = head;
+        while (tmp != null) {
+            result.append(tmp).append(" ");
+            tmp = tmp.getNext();
+        }
+        return result.toString();
+    }
 }
