@@ -18,8 +18,9 @@ public class LinkedList {
     public void insertLast(Node newNode) {
         if (head == null) {
             head = newNode;
+        } else {
+            tail.setNext(newNode);
         }
-        tail.setNext(newNode);
         tail = newNode;
     }
 
