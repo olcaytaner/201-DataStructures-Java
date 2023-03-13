@@ -1,6 +1,6 @@
 public class Node {
-    private int data;
-    private Node next;
+    protected int data;
+    protected Node next;
 
     public Node(int data){
         this.data = data;
