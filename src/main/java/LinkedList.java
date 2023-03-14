@@ -1,6 +1,8 @@
 public class LinkedList {
-    private Node head;
-    private Node tail;
+
+    protected Node head;
+
+    protected Node tail;
 
     public LinkedList() {
         head = null;

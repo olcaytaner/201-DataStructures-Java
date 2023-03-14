@@ -26,4 +26,13 @@ public class LinkedListTest {
         System.out.println(list.toString());
     }
 
+    @Test
+    public void TestInsertFirstForDouble(){
+        DoublyLinkedList list = new DoublyLinkedList();
+        list.insertFirst(new DoublyNode(4));
+        list.insertFirst(new DoublyNode(5));
+        list.insertFirst(new DoublyNode(6));
+        System.out.println(list.toString());
+    }
+
 }
