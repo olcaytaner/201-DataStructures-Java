@@ -40,4 +40,13 @@ public class DoublyLinkedList extends LinkedList{
         ((DoublyNode) node.getNext()).setPrevious(node.getPrevious());
         node.getPrevious().setNext(node.getNext());
     }
+
+    public void deleteLast(){
+        tail = ((DoublyNode)tail).getPrevious();
+        if (tail != null){
+            tail.setNext(null);
+        } else {
+            head = null;
+        }
+    }
 }

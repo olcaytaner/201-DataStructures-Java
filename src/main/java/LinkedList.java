@@ -1,7 +1,6 @@
 public class LinkedList {
 
     protected Node head;
-
     protected Node tail;
 
     public LinkedList() {
