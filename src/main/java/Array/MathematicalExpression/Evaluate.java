@@ -10,10 +10,10 @@ public class Evaluate {
             if (e.type == TokenType.OPERAND){
                 System.out.print(e.operand + " ");
             } else {
-                if (e.operand == '('){
+                if (e.operator == '('){
                     c.push(infixExpression[i]);
                 } else {
-                    if (e.operand == ')'){
+                    if (e.operator == ')'){
                         e1 = c.pop().getData();
                         while (e1.operator != '('){
                             System.out.print(e1.operator + " ");
