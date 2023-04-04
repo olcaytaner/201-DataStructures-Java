@@ -93,4 +93,82 @@ public class Tree {
         }
     }
 
+    public void iterativeInsert(TreeNode node){
+        TreeNode parent = null;
+        TreeNode tmp = root;
+        while (tmp != null) {
+            parent = tmp;
+            if (node.getData() < tmp.getData()){
+                tmp = tmp.getLeft();
+            } else {
+                tmp = tmp.getRight();
+            }
+        }
+        if (parent == null){
+            root = node;
+        } else {
+            if (node.getData() < parent.getData()){
+                parent.setLeft(node);
+            } else {
+                parent.setRight(node);
+            }
+        }
+    }
+
+    public void recursiveInsert(TreeNode node){
+        if (root == null){
+            root = node;
+        } else {
+            root.recursiveInsert(node);
+        }
+    }
+
+    public void prettyPrint(){
+        if (root != null){
+            root.prettyPrint(0);
+        }
+    }
+
+    public int nodeCountWithStack(){
+        TreeNode tmp;
+        int count = 0;
+        Stack c = new Stack(100);
+        if (root != null){
+            c.push(new Element(root));
+        }
+        while (!c.isEmpty()){
+            Element e = c.pop();
+            count++;
+            tmp = e.getData();
+            if (tmp.getLeft() != null){
+                c.push(new Element(tmp.getLeft()));
+            }
+            if (tmp.getRight() != null){
+                c.push(new Element(tmp.getRight()));
+            }
+        }
+        return count;
+    }
+
+    public int nodeCountWithQueue(){
+        TreeNode tmp;
+        int count = 0;
+        Queue c = new Queue(100);
+        if (root != null){
+            c.enqueue(new Element(root));
+        }
+        while (!c.isEmpty()){
+            Element e = c.dequeue();
+            count++;
+            tmp = e.getData();
+            if (tmp.getLeft() != null){
+                c.enqueue(new Element(tmp.getLeft()));
+            }
+            if (tmp.getRight() != null){
+                c.enqueue(new Element(tmp.getRight()));
+            }
+        }
+        return count;
+    }
+
 }

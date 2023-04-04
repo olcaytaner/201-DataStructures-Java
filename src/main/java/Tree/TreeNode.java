@@ -24,6 +24,14 @@ public class TreeNode {
         return data;
     }
 
+    public void setLeft(TreeNode left){
+        this.left = left;
+    }
+
+    public void setRight(TreeNode right){
+        this.right = right;
+    }
+
     public TreeNode recursiveSearch(int value){
         if (data == value){
             return this;
@@ -85,6 +93,35 @@ public class TreeNode {
             right.postorder();
         }
         System.out.println(data);
+    }
+
+    public void prettyPrint(int level){
+        for (int i = 0; i < level; i++){
+            System.out.print("\t");
+        }
+        System.out.println(data);
+        if (left != null){
+            left.prettyPrint(level + 1);
+        }
+        if (right != null){
+            right.prettyPrint(level + 1);
+        }
+    }
+
+    public void recursiveInsert(TreeNode node){
+        if (node.getData() < data){
+            if (left != null){
+                left.recursiveInsert(node);
+            } else {
+                left = node;
+            }
+        } else {
+            if (right != null){
+                right.recursiveInsert(node);
+            } else {
+                right = node;
+            }
+        }
     }
 
 }
