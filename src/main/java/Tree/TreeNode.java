@@ -2,9 +2,9 @@ package Tree;
 
 public class TreeNode {
 
-    private TreeNode left;
-    private TreeNode right;
-    private int data;
+    protected TreeNode left;
+    protected TreeNode right;
+    protected int data;
 
     public TreeNode(int data){
         this.data = data;

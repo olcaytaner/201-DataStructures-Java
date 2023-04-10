@@ -2,7 +2,7 @@ package Tree;
 
 public class Tree {
 
-    private TreeNode root;
+    protected TreeNode root;
 
     public Tree(){
         root = null;
