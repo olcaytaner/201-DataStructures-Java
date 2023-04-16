@@ -93,6 +93,18 @@ public class Tree {
         }
     }
 
+    protected void insertChild(TreeNode parent, TreeNode child){
+        if (parent == null) {
+            root = child;
+        } else {
+            if (child.data < parent.data) {
+                parent.left = child;
+            } else {
+                parent.right = child;
+            }
+        }
+    }
+
     public void iterativeInsert(TreeNode node){
         TreeNode parent = null;
         TreeNode tmp = root;
@@ -104,15 +116,7 @@ public class Tree {
                 tmp = tmp.getRight();
             }
         }
-        if (parent == null){
-            root = node;
-        } else {
-            if (node.getData() < parent.getData()){
-                parent.setLeft(node);
-            } else {
-                parent.setRight(node);
-            }
-        }
+        insertChild(parent, node);
     }
 
     public void recursiveInsert(TreeNode node){

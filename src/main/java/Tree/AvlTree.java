@@ -42,4 +42,46 @@ public class AvlTree extends Tree{
         return rotateRight(k1);
     }
 
+    public void insert(AvlTreeNode node){
+        int LEFT = 1, RIGHT = 2;
+        AvlTreeNode y = null, x = (AvlTreeNode) root, t;
+        int dir1 = 0, dir2 = 0;
+        Stack c = new Stack(100);
+        while (x != null){
+            y = x;
+            c.push(new Element(y));
+            dir1 = dir2;
+            if (node.data < x.data){
+                x = (AvlTreeNode) x.left;
+                dir2 = LEFT;
+            } else {
+                x = (AvlTreeNode) x.right;
+                dir2 = RIGHT;
+            }
+        }
+        insertChild(y, node);
+        while (!c.isEmpty()){
+            x = (AvlTreeNode) c.pop().getData();
+            x.setHeight(Math.max(((AvlTreeNode) x.left).getHeight(), ((AvlTreeNode) x.right).getHeight()) + 1);
+            if (Math.abs(((AvlTreeNode) x.left).getHeight() - ((AvlTreeNode) x.right).getHeight()) == 2){
+                if (dir1 == LEFT){
+                    if (dir2 == LEFT){
+                        t = rotateLeft(x);
+                    } else {
+                        t = doubleRotateLeft(x);
+                    }
+                } else {
+                    if (dir2 == LEFT){
+                        t = doubleRotateRight(x);
+                    } else {
+                        t = rotateRight(x);
+                    }
+                }
+                y = (AvlTreeNode) c.pop().getData();
+                insertChild(y, t);
+                break;
+            }
+        }
+    }
+
 }
