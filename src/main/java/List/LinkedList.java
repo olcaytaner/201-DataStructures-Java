@@ -95,6 +95,29 @@ public class LinkedList {
         return previous;
     }
 
+    public void deleteValue(int value){
+        Node tmp = head;
+        Node previous = null;
+        while (tmp != null) {
+            if (tmp.getData() == value){
+                if (previous != null){
+                    previous.setNext(tmp.next);
+                    if (tmp.next == null){
+                        tail = previous;
+                    }
+                } else {
+                    head = tmp.next;
+                    if (head == null){
+                        tail = null;
+                    }
+                }
+                break;
+            }
+            previous = tmp;
+            tmp = tmp.getNext();
+        }
+    }
+
     public void deleteLast(){
         tail = getPrevious(tail);
         if (tail != null){
