@@ -2,10 +2,10 @@ package Array;
 
 public class Heap {
 
-    private HeapNode array[];
-    private int count;
+    protected HeapNode array[];
+    protected int count;
 
-    private int N;
+    protected int N;
 
     public Heap(int N){
         array = new HeapNode[N];
