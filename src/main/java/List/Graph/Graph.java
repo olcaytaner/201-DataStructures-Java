@@ -15,12 +15,12 @@ public class Graph {
 
     public void addEdge(int from, int to){
         Edge edge = new Edge(to, 1);
-        edges[from].addEdge(edge);
+        edges[from].insert(edge);
     }
 
     public void addEdge(int from, int to, int weight){
         Edge edge = new Edge(to, weight);
-        edges[from].addEdge(edge);
+        edges[from].insert(edge);
     }
 
 }

@@ -1,7 +1,5 @@
 package List.Graph;
 
-import List.Node;
-
 public class EdgeList {
     private Edge head;
     private Edge tail;
@@ -26,7 +24,7 @@ public class EdgeList {
         return null;
     }
 
-    public void addEdge(Edge newEdge) {
+    public void insert(Edge newEdge) {
         if (head == null) {
             head = newEdge;
         } else {
