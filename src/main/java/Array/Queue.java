@@ -21,18 +21,18 @@ public class Queue {
         return (last + 1) % N == first;
     }
 
-    boolean isEmpty(){
+    public boolean isEmpty(){
         return first == last;
     }
 
-    void enqueue(Element element){
+    public void enqueue(Element element){
         if (!isFull()){
             array[last] = element;
             last = (last + 1) % N;
         }
     }
 
-    Element dequeue(){
+    public Element dequeue(){
         if (!isEmpty()){
             Element tmp = array[first];
             first = (first + 1) % N;

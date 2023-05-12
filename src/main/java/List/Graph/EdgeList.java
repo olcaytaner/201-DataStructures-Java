@@ -33,4 +33,8 @@ public class EdgeList {
         tail = newEdge;
     }
 
+    public Edge getHead(){
+        return head;
+    }
+
 }

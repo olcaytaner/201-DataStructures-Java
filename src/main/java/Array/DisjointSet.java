@@ -4,6 +4,13 @@ public class DisjointSet {
     private Set[] sets;
     private int count;
 
+    public DisjointSet(int count){
+        sets = new Set[count];
+        for (int i = 0; i < count; i++){
+            sets[i] = new Set(i, i);
+        }        this.count = count;
+    }
+
     public DisjointSet(int[] elements, int count){
         sets = new Set[count];
         for (int i = 0; i < count; i++){
