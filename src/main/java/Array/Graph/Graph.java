@@ -27,7 +27,7 @@ public class Graph {
         edges[from][to] = weight;
     }
 
-    public void connectedComponentsDisjointSet(){
+    public void connectedComponentDisjointSet(){
         DisjointSet sets = new DisjointSet(vertexCount);
         for (int fromNode = 0; fromNode < vertexCount; fromNode++){
             for (int toNode = 0; toNode < vertexCount; toNode++){

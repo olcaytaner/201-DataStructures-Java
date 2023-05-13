@@ -8,7 +8,8 @@ public class DisjointSet {
         sets = new Set[count];
         for (int i = 0; i < count; i++){
             sets[i] = new Set(i, i);
-        }        this.count = count;
+        }
+        this.count = count;
     }
 
     public DisjointSet(int[] elements, int count){
