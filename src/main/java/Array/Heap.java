@@ -13,22 +13,22 @@ public class Heap {
         this.N = N;
     }
 
-    boolean isEmpty(){
+    public boolean isEmpty(){
         return count == 0;
     }
 
-    boolean isFull(){
+    public boolean isFull(){
         return count == N;
     }
 
-    void swapNode(int index1, int index2){
+    protected void swapNode(int index1, int index2){
         HeapNode tmpNode;
         tmpNode = array[index1];
         array[index1] = array[index2];
         array[index2] = tmpNode;
     }
 
-    HeapNode deleteMax(){
+    public HeapNode deleteMax(){
         HeapNode tmp;
         tmp = array[0];
         array[0] = array[count - 1];
@@ -37,7 +37,16 @@ public class Heap {
         return tmp;
     }
 
-    void percolateDown(int no){
+    public int search(int name){
+        for (int i = 0; i < count; i++){
+            if (array[i].getName() == name){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    protected void percolateDown(int no){
         int left, right;
         left = 2 * no + 1;
         right = 2 * no + 2;
@@ -55,7 +64,7 @@ public class Heap {
         }
     }
 
-    void percolateUp(int no){
+    protected void percolateUp(int no){
         int parent;
         parent = (no - 1) / 2;
         while (parent >= 0 && array[parent].getData() < array[no].getData()){
@@ -65,13 +74,13 @@ public class Heap {
         }
     }
 
-    void insert(HeapNode node){
+    public void insert(HeapNode node){
         count++;
         array[count - 1] = node;
         percolateUp(count - 1);
     }
 
-    void update(int k, int newValue){
+    public void update(int k, int newValue){
         int oldValue = array[k].getData();
         array[k].setData(newValue);
         if (oldValue > newValue){

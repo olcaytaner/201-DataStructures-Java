@@ -5,7 +5,7 @@ public class HeapNode {
     private int data;
     private int name;
 
-    HeapNode(int data, int name){
+    public HeapNode(int data, int name){
         this.data = data;
         this.name = name;
     }

@@ -1,16 +1,15 @@
 package Array.Graph;
 
-import Array.DisjointSet;
-import Array.Element;
-import Array.Queue;
+import Array.*;
+import General.AbstractGraph;
+import General.Path;
 
-public class Graph {
+public class Graph extends AbstractGraph {
 
     private int[][] edges;
-    private int vertexCount;
 
     public Graph(int vertexCount){
-        this.vertexCount = vertexCount;
+        super(vertexCount);
         edges = new int[vertexCount][vertexCount];
         for (int i = 0; i < vertexCount; i++){
             for (int j = 0; j < vertexCount; j++){
@@ -40,18 +39,7 @@ public class Graph {
         }
     }
 
-    public int connectedComponentDfs(){
-        int component = 0;
-        boolean[] visited = new boolean[vertexCount];
-        for (int vertex = 0; vertex < vertexCount; vertex++){
-            visited[vertex] = true;
-            depthFirstSearch(visited, vertex);
-            component++;
-        }
-        return component;
-    }
-
-    private void depthFirstSearch(boolean[] visited, int fromNode){
+    protected void depthFirstSearch(boolean[] visited, int fromNode){
         for (int toNode = 0; toNode < vertexCount; toNode++){
             if (edges[fromNode][toNode] > 0){
                 if (!visited[toNode]){
@@ -62,18 +50,7 @@ public class Graph {
         }
     }
 
-    public int connectedComponentBfs(){
-        int component = 0;
-        boolean[] visited = new boolean[vertexCount];
-        for (int vertex = 0; vertex < vertexCount; vertex++){
-            visited[vertex] = true;
-            breadthFirstSearch(visited, vertex);
-            component++;
-        }
-        return component;
-    }
-
-    private void breadthFirstSearch(boolean[] visited, int startNode){
+    protected void breadthFirstSearch(boolean[] visited, int startNode){
         int fromNode;
         Queue queue = new Queue(100);
         queue.enqueue(new Element(startNode));
@@ -88,6 +65,44 @@ public class Graph {
                 }
             }
         }
+    }
+
+    public Path[] bellmanFord(int source){
+        Path[] shortestPaths = initializePaths(source);
+        for (int i = 0; i < vertexCount - 1; i++){
+            for (int fromNode = 0; fromNode < vertexCount; fromNode++){
+                for (int toNode = 0; toNode < vertexCount; toNode++){
+                    int newDistance = shortestPaths[fromNode].getDistance() + edges[fromNode][toNode];
+                    if (newDistance < shortestPaths[toNode].getDistance()){
+                        shortestPaths[toNode].setDistance(newDistance);
+                        shortestPaths[toNode].setPrevious(fromNode);
+                    }
+                }
+            }
+        }
+        return shortestPaths;
+    }
+
+    public Path[] dijkstra(int source){
+        Path[] shortestPaths = initializePaths(source);
+        Heap heap = new Heap(vertexCount);
+        for (int i = 0; i < vertexCount; i++){
+            heap.insert(new HeapNode(shortestPaths[i].getDistance(), i));
+        }
+        while (!heap.isEmpty()){
+            HeapNode node = heap.deleteMax();
+            int fromNode = node.getName();
+            for (int toNode = 0; toNode < vertexCount; toNode++){
+                int newDistance = shortestPaths[fromNode].getDistance() + edges[fromNode][toNode];
+                if (newDistance < shortestPaths[toNode].getDistance()){
+                    int position = heap.search(toNode);
+                    heap.update(position, newDistance);
+                    shortestPaths[toNode].setDistance(newDistance);
+                    shortestPaths[toNode].setPrevious(fromNode);
+                }
+            }
+        }
+        return shortestPaths;
     }
 
 }

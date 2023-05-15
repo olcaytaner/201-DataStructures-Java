@@ -9,7 +9,7 @@ public class DHeap extends Heap{
         this.d = d;
     }
 
-    void percolateDown(int no){
+    protected void percolateDown(int no){
         int child, largestChild;
         int value;
         do{
@@ -30,7 +30,7 @@ public class DHeap extends Heap{
             }
         } while (true);
     }
-    void percolateUp(int no){
+    protected void percolateUp(int no){
         int parent;
         parent = (no - 1) / d;
         while (parent >= 0 && array[parent].getData() < array[no].getData()){
