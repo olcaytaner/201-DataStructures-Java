@@ -105,4 +105,24 @@ public class Graph extends AbstractGraph {
         return shortestPaths;
     }
 
+    public int[][] floydWarshall(){
+        int[][] distances;
+        distances = new int[vertexCount][vertexCount];
+        for (int i = 0; i < vertexCount; i++){
+            for (int j = 0; j < vertexCount; j++){
+                distances[i][j] = edges[i][j];
+            }
+        }
+        for (int k = 0; k < vertexCount; k++){
+            for (int i = 0; i < vertexCount; i++){
+                for (int j = 0; j < vertexCount; j++){
+                    int newDistance = distances[i][k] + distances[k][j];
+                    if (newDistance < distances[i][j])
+                        distances[i][j] = newDistance;
+                }
+            }
+        }
+        return distances;
+    }
+
 }
