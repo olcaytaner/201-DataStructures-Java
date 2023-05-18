@@ -8,6 +8,9 @@ import General.Path;
 import List.Node;
 import List.Queue;
 
+import java.util.Arrays;
+import java.util.Collections;
+
 public class Graph extends AbstractGraph {
     private EdgeList[] edges;
 
@@ -20,12 +23,12 @@ public class Graph extends AbstractGraph {
     }
 
     public void addEdge(int from, int to){
-        Edge edge = new Edge(to, 1);
+        Edge edge = new Edge(from, to, 1);
         edges[from].insert(edge);
     }
 
     public void addEdge(int from, int to, int weight){
-        Edge edge = new Edge(to, weight);
+        Edge edge = new Edge(from, to, weight);
         edges[from].insert(edge);
     }
 
@@ -122,6 +125,52 @@ public class Graph extends AbstractGraph {
             }
         }
         return shortestPaths;
+    }
+
+    protected Edge[] edgeList(){
+        Edge[] list;
+        int edgeCount = 0;
+        for (int i = 0; i < vertexCount; i++){
+            Edge edge = edges[i].getHead();
+            while (edge != null){
+                edgeCount++;
+                edge = edge.getNext();
+            }
+        }
+        list = new Edge[edgeCount];
+        int index = 0;
+        for (int i = 0; i < vertexCount; i++){
+            Edge edge = edges[i].getHead();
+            while (edge != null){
+                list[index] = new Edge(edge.getFrom(), edge.getTo(), edge.getWeight());
+                index++;
+                edge = edge.getNext();
+            }
+        }
+        return list;
+    }
+
+    public void prim(){
+        Path[] paths = initializePaths(0);
+        Heap heap = new Heap(vertexCount);
+        for (int i = 0; i < vertexCount; i++){
+            heap.insert(new HeapNode(paths[i].getDistance(), i));
+        }
+        while (!heap.isEmpty()){
+            HeapNode node = heap.deleteMax();
+            int fromNode = node.getName();
+            Edge edge = edges[fromNode].getHead();
+            while (edge != null){
+                int toNode = edge.getTo();
+                if (paths[toNode].getDistance() > edge.getWeight()){
+                    int position = heap.search(toNode);
+                    heap.update(position, edge.getWeight());
+                    paths[toNode].setDistance(edge.getWeight());
+                    paths[toNode].setPrevious(fromNode);
+                }
+                edge = edge.getNext();
+            }
+        }
     }
 
 }

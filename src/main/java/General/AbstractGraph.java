@@ -1,5 +1,10 @@
 package General;
 
+import Array.DisjointSet;
+import List.Graph.Edge;
+
+import java.util.Arrays;
+
 public abstract class AbstractGraph {
 
     protected int vertexCount;
@@ -10,6 +15,7 @@ public abstract class AbstractGraph {
 
     protected abstract void depthFirstSearch(boolean[] visited, int fromNode);
     protected abstract void breadthFirstSearch(boolean[] visited, int startNode);
+    protected abstract Edge[] edgeList();
 
     protected Path[] initializePaths(int source){
         Path[] paths = new Path[vertexCount];
@@ -42,4 +48,20 @@ public abstract class AbstractGraph {
         return component;
     }
 
+    public void kruskal(){
+        int edgeCount = 0, i;
+        DisjointSet sets = new DisjointSet(vertexCount);
+        Edge[] list = edgeList();
+        Arrays.sort(list);
+        i = 0;
+        while (edgeCount < vertexCount - 1){
+            int fromNode = list[i].getFrom();
+            int toNode = list[i].getTo();
+            if (sets.findSetRecursive(fromNode) != sets.findSetRecursive(toNode)){
+                sets.unionOfSets(fromNode, toNode);
+                edgeCount++;
+            }
+            i++;
+        }
+    }
 }

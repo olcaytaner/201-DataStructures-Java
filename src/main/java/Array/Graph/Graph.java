@@ -3,6 +3,7 @@ package Array.Graph;
 import Array.*;
 import General.AbstractGraph;
 import General.Path;
+import List.Graph.Edge;
 
 public class Graph extends AbstractGraph {
 
@@ -123,6 +124,49 @@ public class Graph extends AbstractGraph {
             }
         }
         return distances;
+    }
+
+    protected Edge[] edgeList(){
+        Edge[] list;
+        int edgeCount = 0;
+        for (int i = 0; i < vertexCount; i++){
+            for (int j = 0; j < vertexCount; j++){
+                if (edges[i][j] > 0){
+                    edgeCount++;
+                }
+            }
+        }
+        list = new Edge[edgeCount];
+        int index = 0;
+        for (int i = 0; i < vertexCount; i++){
+            for (int j = 0; j < vertexCount; j++){
+                if (edges[i][j] > 0){
+                    list[index] = new Edge(i, j, edges[i][j]);
+                    index++;
+                }
+            }
+        }
+        return list;
+    }
+
+    public void prim(){
+        Path[] paths = initializePaths(0);
+        Heap heap = new Heap(vertexCount);
+        for (int i = 0; i < vertexCount; i++){
+            heap.insert(new HeapNode(paths[i].getDistance(), i));
+        }
+        while (!heap.isEmpty()){
+            HeapNode node = heap.deleteMax();
+            int fromNode = node.getName();
+            for (int toNode = 0; toNode < vertexCount; toNode++){
+                if (paths[toNode].getDistance() > edges[fromNode][toNode]){
+                    int position = heap.search(toNode);
+                    heap.update(position, edges[fromNode][toNode]);
+                    paths[toNode].setDistance(edges[fromNode][toNode]);
+                    paths[toNode].setPrevious(fromNode);
+                }
+            }
+        }
     }
 
 }
