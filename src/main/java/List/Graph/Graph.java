@@ -1,15 +1,12 @@
 package List.Graph;
 
 import Array.DisjointSet;
-import Array.Heap;
-import Array.HeapNode;
+import Array.Heap.HeapNode;
+import Array.Heap.MinHeap;
 import General.AbstractGraph;
 import General.Path;
 import List.Node;
 import List.Queue;
-
-import java.util.Arrays;
-import java.util.Collections;
 
 public class Graph extends AbstractGraph {
     private EdgeList[] edges;
@@ -104,12 +101,12 @@ public class Graph extends AbstractGraph {
     public Path[] dijkstra(int source){
         Edge edge;
         Path[] shortestPaths = initializePaths(source);
-        Heap heap = new Heap(vertexCount);
+        MinHeap heap = new MinHeap(vertexCount);
         for (int i = 0; i < vertexCount; i++){
             heap.insert(new HeapNode(shortestPaths[i].getDistance(), i));
         }
         while (!heap.isEmpty()){
-            HeapNode node = heap.deleteMax();
+            HeapNode node = heap.delete();
             int fromNode = node.getName();
             edge = edges[fromNode].getHead();
             while (edge != null){
@@ -152,12 +149,12 @@ public class Graph extends AbstractGraph {
 
     public void prim(){
         Path[] paths = initializePaths(0);
-        Heap heap = new Heap(vertexCount);
+        MinHeap heap = new MinHeap(vertexCount);
         for (int i = 0; i < vertexCount; i++){
             heap.insert(new HeapNode(paths[i].getDistance(), i));
         }
         while (!heap.isEmpty()){
-            HeapNode node = heap.deleteMax();
+            HeapNode node = heap.delete();
             int fromNode = node.getName();
             Edge edge = edges[fromNode].getHead();
             while (edge != null){

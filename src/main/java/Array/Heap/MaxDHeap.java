@@ -1,12 +1,9 @@
-package Array;
+package Array.Heap;
 
-public class DHeap extends Heap{
+public class MaxDHeap extends DHeap {
 
-    private int d;
-
-    public DHeap(int N, int d){
-        super(N);
-        this.d = d;
+    public MaxDHeap(int N, int d) {
+        super(N, d);
     }
 
     protected void percolateDown(int no){
@@ -40,4 +37,13 @@ public class DHeap extends Heap{
         }
     }
 
+    public void update(int k, int newValue){
+        int oldValue = array[k].getData();
+        array[k].setData(newValue);
+        if (oldValue > newValue){
+            percolateDown(k);
+        } else {
+            percolateUp(k);
+        }
+    }
 }

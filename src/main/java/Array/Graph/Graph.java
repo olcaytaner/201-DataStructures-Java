@@ -1,6 +1,8 @@
 package Array.Graph;
 
 import Array.*;
+import Array.Heap.HeapNode;
+import Array.Heap.MinHeap;
 import General.AbstractGraph;
 import General.Path;
 import List.Graph.Edge;
@@ -86,12 +88,12 @@ public class Graph extends AbstractGraph {
 
     public Path[] dijkstra(int source){
         Path[] shortestPaths = initializePaths(source);
-        Heap heap = new Heap(vertexCount);
+        MinHeap heap = new MinHeap(vertexCount);
         for (int i = 0; i < vertexCount; i++){
             heap.insert(new HeapNode(shortestPaths[i].getDistance(), i));
         }
         while (!heap.isEmpty()){
-            HeapNode node = heap.deleteMax();
+            HeapNode node = heap.delete();
             int fromNode = node.getName();
             for (int toNode = 0; toNode < vertexCount; toNode++){
                 int newDistance = shortestPaths[fromNode].getDistance() + edges[fromNode][toNode];
@@ -151,12 +153,12 @@ public class Graph extends AbstractGraph {
 
     public void prim(){
         Path[] paths = initializePaths(0);
-        Heap heap = new Heap(vertexCount);
+        MinHeap heap = new MinHeap(vertexCount);
         for (int i = 0; i < vertexCount; i++){
             heap.insert(new HeapNode(paths[i].getDistance(), i));
         }
         while (!heap.isEmpty()){
-            HeapNode node = heap.deleteMax();
+            HeapNode node = heap.delete();
             int fromNode = node.getName();
             for (int toNode = 0; toNode < vertexCount; toNode++){
                 if (paths[toNode].getDistance() > edges[fromNode][toNode]){

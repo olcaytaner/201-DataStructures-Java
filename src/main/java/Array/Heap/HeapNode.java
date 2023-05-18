@@ -1,4 +1,4 @@
-package Array;
+package Array.Heap;
 
 public class HeapNode {
 
