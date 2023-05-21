@@ -30,9 +30,11 @@ public abstract class AbstractGraph {
         int component = 0;
         boolean[] visited = new boolean[vertexCount];
         for (int vertex = 0; vertex < vertexCount; vertex++){
-            visited[vertex] = true;
-            depthFirstSearch(visited, vertex);
-            component++;
+            if (!visited[vertex]){
+                visited[vertex] = true;
+                depthFirstSearch(visited, vertex);
+                component++;
+            }
         }
         return component;
     }
@@ -41,9 +43,11 @@ public abstract class AbstractGraph {
         int component = 0;
         boolean[] visited = new boolean[vertexCount];
         for (int vertex = 0; vertex < vertexCount; vertex++){
-            visited[vertex] = true;
-            breadthFirstSearch(visited, vertex);
-            component++;
+            if (!visited[vertex]){
+                visited[vertex] = true;
+                breadthFirstSearch(visited, vertex);
+                component++;
+            }
         }
         return component;
     }
