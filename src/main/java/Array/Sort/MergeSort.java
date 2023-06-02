@@ -11,7 +11,7 @@ public class MergeSort implements Sort{
             leftPart[i] = A[start + i];
         }
         for (int i = 0; i < rightCount; i++){
-            rightPart[i] = A[middle + i];
+            rightPart[i] = A[middle + i + 1];
         }
         leftPart[leftCount] = Integer.MAX_VALUE;
         rightPart[rightCount] = Integer.MAX_VALUE;
