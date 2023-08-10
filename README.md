@@ -1,0 +1,8 @@
+Data Structures and Algorithms in C++ and Java
+============
+
+This site is an extension for the introductory text book for the Data Structures and Algorithms course. Data structures and algorithms is a standard course taught in many universities teaching computer engineering and/or computer science. In general, an introduction to programming course is taught as a prerequisite before the data structures course, and afterwards an algorithm course is taught to complete the problem solving objective.
+
+The book is designed as a 40 hour course work. An example course schedule can be designed as: Link list, tree, graph and sorting algorithms require 6 hours; algorithm analysis, stack, queue, hashing, and disjoint set require 3 hours. The first chapter of the book gives an introductory info about algorithm analysis, afterwards the main data structures are explained in the coming 8 chapters (from chapter 2 to chapter 9). Although the last chapter, i.e. sorting algorithms, is not a data structure, it is included since sorting is taught in many universities as a part of this course. 
+
+In each data structure chapter, we give the data structure codes, then we introduce the main operations on that data structure. One can implement the same data structure in many ways, therefore more than one implementation and its basic operations of the same implementation is given in some chapters.  For example, link list is implemented as single link list, double link list and circular link list, and the basic operations insertion and deletion are given for all these implementations. As a last step, we give one or more example applications of the data structure, which helps the student to understand the concept more throughly in everyday applications.
