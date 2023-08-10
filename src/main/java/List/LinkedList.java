@@ -19,7 +19,7 @@ public class LinkedList {
     }
 
     public void insertFirst(Node newNode) {
-        if (tail == null) {
+        if (isEmpty()) {
             tail = newNode;
         }
         newNode.setNext(head);
@@ -27,7 +27,7 @@ public class LinkedList {
     }
 
     public void insertLast(Node newNode) {
-        if (head == null) {
+        if (isEmpty()) {
             head = newNode;
         } else {
             tail.setNext(newNode);
@@ -80,7 +80,7 @@ public class LinkedList {
 
     public void deleteFirst(){
         head = head.getNext();
-        if (head == null){
+        if (isEmpty()){
             tail = null;
         }
     }

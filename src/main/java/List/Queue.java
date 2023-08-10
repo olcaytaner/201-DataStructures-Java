@@ -15,7 +15,7 @@ public class Queue {
     }
 
     public void enqueue(Node newNode) {
-        if (first == null) {
+        if (isEmpty()) {
             first = newNode;
         } else {
             last.setNext(newNode);
@@ -27,7 +27,7 @@ public class Queue {
         Node result = first;
         if (!isEmpty()){
             first = first.getNext();
-            if (first == null){
+            if (isEmpty()){
                 last = null;
             }
         }
