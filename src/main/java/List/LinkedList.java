@@ -34,7 +34,7 @@ public class LinkedList {
         }
         tail = newNode;
     }
-
+    
     public void insertMiddle(Node newNode, Node previous) {
         newNode.setNext(previous.getNext());
         previous.setNext(newNode);

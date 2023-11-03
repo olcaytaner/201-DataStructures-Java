@@ -1,5 +1,3 @@
-import Array.Element;
-import Array.Queue;
 import Tree.Tree;
 import Tree.TreeNode;
 import org.junit.Test;
@@ -17,9 +15,15 @@ public class TreeTest {
         tree.iterativeInsert(new TreeNode(10));
         tree.iterativeInsert(new TreeNode(5));
         tree.iterativeInsert(new TreeNode(7));
-        //tree.prettyPrint();
-        System.out.println(tree.nodeCountWithStack());
-        System.out.println(tree.nodeCountWithQueue());
+        tree.prettyPrint();
+        tree.delete(6);
+        tree.prettyPrint();
+        tree.delete(5);
+        tree.prettyPrint();
+        tree.delete(4);
+        tree.prettyPrint();
+        tree.delete(1);
+        tree.prettyPrint();
     }
 
 }

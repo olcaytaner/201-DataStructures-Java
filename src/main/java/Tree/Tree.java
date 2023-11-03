@@ -2,6 +2,9 @@ package Tree;
 
 public class Tree {
 
+    final static int LEFT = 0;
+    final static int RIGHT = 1;
+
     protected TreeNode root;
 
     public Tree(){
@@ -73,6 +76,51 @@ public class Tree {
             return root.recursiveMaxSearch();
         }
         return null;
+    }
+
+    public void delete(int value){
+        TreeNode y = null, x = root, parent = null;
+        while (x.data != value){
+            parent = x;
+            if (x.data > value){
+                x = x.left;
+            } else {
+                x = x.right;
+            }
+        }
+        while (true){
+            if (x.left != null){
+                y = x.left.recursiveMaxSearch();
+                parent = x;
+                if (parent.left != y){
+                    parent = parent.left;
+                    while (parent.right != y){
+                        parent = parent.right;
+                    }
+                }
+            }
+            if (y == null && x.right != null){
+                y = x.right.recursiveMinSearch();
+                parent = x;
+                if (parent.right != y){
+                    parent = parent.right;
+                    while (parent.left != y){
+                        parent = parent.left;
+                    }
+                }
+            }
+            if (y == null){
+                if (parent.left == x){
+                    parent.left = null;
+                } else {
+                    parent.right = null;
+                }
+                break;
+            }
+            x.data = y.data;
+            x = y;
+            y = null;
+        }
     }
 
     public void inorder(){
