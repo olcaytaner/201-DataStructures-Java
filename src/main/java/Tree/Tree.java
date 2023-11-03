@@ -92,7 +92,7 @@ public class Tree {
     }
 
     public void delete(int value){
-        TreeNode y = null, x = root, parent;
+        TreeNode y, x = root, parent;
         while (x.data != value){
             if (x.data > value){
                 x = x.left;
@@ -105,26 +105,25 @@ public class Tree {
             if (x.left != null){
                 y = x.left.recursiveMaxSearch();
                 parent = getParent(y);
-            }
-            if (y == null && x.right != null){
-                y = x.right.recursiveMinSearch();
-                parent = getParent(y);
-            }
-            if (y == null){
-                if (parent == null){
-                    root = null;
+            } else {
+                if (x.right != null){
+                    y = x.right.recursiveMinSearch();
+                    parent = getParent(y);
                 } else {
-                    if (parent.left == x){
-                        parent.left = null;
+                    if (parent == null){
+                        root = null;
                     } else {
-                        parent.right = null;
+                        if (parent.left == x){
+                            parent.left = null;
+                        } else {
+                            parent.right = null;
+                        }
                     }
+                    break;
                 }
-                break;
             }
             x.data = y.data;
             x = y;
-            y = null;
         }
     }
 
