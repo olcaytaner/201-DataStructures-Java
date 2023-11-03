@@ -24,6 +24,12 @@ public class TreeTest {
         tree.prettyPrint();
         tree.delete(1);
         tree.prettyPrint();
+        tree.delete(7);
+        tree.prettyPrint();
+        tree.delete(8);
+        tree.prettyPrint();
+        tree.delete(10);
+        tree.prettyPrint();
     }
 
 }

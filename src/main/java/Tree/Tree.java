@@ -78,42 +78,47 @@ public class Tree {
         return null;
     }
 
+    public TreeNode getParent(TreeNode node){
+        TreeNode x = root, parent = null;
+        while (x != node){
+            parent = x;
+            if (x.data > node.data){
+                x = x.left;
+            } else {
+                x = x.right;
+            }
+        }
+        return parent;
+    }
+
     public void delete(int value){
         TreeNode y = null, x = root, parent = null;
         while (x.data != value){
-            parent = x;
             if (x.data > value){
                 x = x.left;
             } else {
                 x = x.right;
             }
         }
+        parent = getParent(x);
         while (true){
             if (x.left != null){
                 y = x.left.recursiveMaxSearch();
-                parent = x;
-                if (parent.left != y){
-                    parent = parent.left;
-                    while (parent.right != y){
-                        parent = parent.right;
-                    }
-                }
+                parent = getParent(y);
             }
             if (y == null && x.right != null){
                 y = x.right.recursiveMinSearch();
-                parent = x;
-                if (parent.right != y){
-                    parent = parent.right;
-                    while (parent.left != y){
-                        parent = parent.left;
-                    }
-                }
+                parent = getParent(y);
             }
             if (y == null){
-                if (parent.left == x){
-                    parent.left = null;
+                if (parent == null){
+                    root = null;
                 } else {
-                    parent.right = null;
+                    if (parent.left == x){
+                        parent.left = null;
+                    } else {
+                        parent.right = null;
+                    }
                 }
                 break;
             }
