@@ -92,7 +92,7 @@ public class Tree {
     }
 
     public void delete(int value){
-        TreeNode y = null, x = root, parent = null;
+        TreeNode y = null, x = root, parent;
         while (x.data != value){
             if (x.data > value){
                 x = x.left;
