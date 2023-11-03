@@ -78,7 +78,7 @@ public class Tree {
         return null;
     }
 
-    public TreeNode getParent(TreeNode node){
+    protected TreeNode getParent(TreeNode node){
         TreeNode x = root, parent = null;
         while (x != node){
             parent = x;
